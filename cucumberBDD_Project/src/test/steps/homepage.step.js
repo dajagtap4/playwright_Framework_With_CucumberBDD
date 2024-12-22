@@ -17,40 +17,28 @@ Before(async function () {
 
 });
 
-Given("User navigates to the Browserstack Homepage", async () => {
+Given("User navigates to the polestar Homepage", async () => {
 
-    await page.goto("https://www.browserstack.com/");
-
-});
-
-When('User clicks on Product Menu', async function () {
-
-    await page.locator('button[aria-label="Products"]').waitFor();
-
-    await page.locator('button[aria-label="Products"]').click();
+    await page.goto("https://www.polestar.com/se/");
 
 });
 
-Then('It should show Web Testing Product', async function () {
+Given('User will accep all', async function () {
+ 
+    await page.getByRole('button', { name: 'Accept all' }).waitFor();
+    await page.getByRole('button', { name: 'Accept all' }).click();
 
-    await page.locator('div[aria-label="Products"] button[title="Web Testing"]').waitFor();
+  });
 
-    expect(await page.locator('div[aria-label="Products"] button[title="Web Testing"] span').isVisible()).toBeTruthy()
+  Given('User click on instagram link', async function () {
+    await page.locator("//a[text()='Instagram']").waitFor()
+    await page.locator("//a[text()='Instagram']").click()
+  });
 
-});
-
-Given('User Navigates to Browserstack Homepage', async function () {
-
-    await page.goto("https://www.browserstack.com/");
-
-});
-
-When('User clicks on Pricing Menu', async function () {
-
-    await page.locator('a[title="Pricing"]').click();
-
-});
-
+  Given('User assert homepage title', async function () {
+    const pageTitle = await page.title();
+    console.log(`Page title: ${pageTitle}`);
+  });
 
 After(async function () {
 
