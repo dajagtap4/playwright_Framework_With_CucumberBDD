@@ -4,6 +4,6 @@ Feature: Homepage Functionality
     Given User navigates to the polestar Homepage
     * User will accep all 
     * User click on instagram link
-    * User assert homepage title
+    * User assert homepage title.
 
 
