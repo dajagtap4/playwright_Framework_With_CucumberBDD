@@ -35,7 +35,7 @@ Given('User will accep all', async function () {
     await page.locator("//a[text()='Instagram']").click()
   });
 
-  Given('User assert homepage title', async function () {
+  Given('User assert homepage title.', async function () {
     const pageTitle = await page.title();
     console.log(`Page title: ${pageTitle}`);
   });
