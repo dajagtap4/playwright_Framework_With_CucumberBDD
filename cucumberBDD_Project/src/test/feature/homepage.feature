@@ -6,4 +6,3 @@ Feature: Homepage Functionality
     * User click on instagram link
     * User assert homepage title.
 
-
