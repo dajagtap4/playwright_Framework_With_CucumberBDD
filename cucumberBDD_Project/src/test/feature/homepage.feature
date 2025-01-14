@@ -6,3 +6,8 @@ Feature: Homepage Functionality
     * User click on instagram link
     * User assert homepage title.
 
+  Scenario: TC:002 -  Enter name and email in testautomationpractice's form
+    Given User navigates to the testautomationpractice form page
+    * User will enter name
+    * User will enter email
+

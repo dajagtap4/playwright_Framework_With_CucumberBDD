@@ -1,8 +1,8 @@
 const { Given, When, Then, Before, After, setDefaultTimeout } = require("@cucumber/cucumber");
-
 const { chromium, expect } = require("@playwright/test");
-
 const { Page } = require("playwright");
+const locators = require('../locators/locators');
+const testData = require('../data/testData')
 
 setDefaultTimeout(60 * 1000);
 
@@ -31,8 +31,8 @@ Given('User will accep all', async function () {
   });
 
   Given('User click on instagram link', async function () {
-    await page.locator("//a[text()='Instagram']").waitFor()
-    await page.locator("//a[text()='Instagram']").click()
+    await page.locator(locators.instagramLink).waitFor()
+    await page.locator(locators.instagramLink).click()
   });
 
   Given('User assert homepage title.', async function () {
@@ -40,6 +40,21 @@ Given('User will accep all', async function () {
     console.log(`Page title: ${pageTitle}`);
   });
 
+// TC: 002
+
+  Given('User navigates to the testautomationpractice form page', async function () {
+    await page.goto('https://testautomationpractice.blogspot.com/'); // Replace with the actual URL
+  });
+
+  Given('User will enter name', async function () {
+    // Fill in the name field
+    await page.fill(locators.nameInput, testData.validUser.name);
+  });
+
+  Given('User will enter email', async function () {
+    // Fill in the email field
+    await page.fill(locators.emailInput, testData.validUser.email);
+  });
 After(async function () {
 
     await browser.close();
