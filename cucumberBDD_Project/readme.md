@@ -93,7 +93,7 @@ src/test
 ```
 Feature: Homepage Functionality
 
-  Scenario: Verify Product Web Testing
+  Scenario: "Verify Product We"b Testing
     Given User navigates to the Browserstack Homepage
     When User clicks on Product Menu
     Then It should show Web Testing Product
@@ -168,7 +168,52 @@ After(async function () {
 ```
 
 
-run test with below command
+run `all tests` with below command
 ```
  npm test
  ```
+We can run a ***particular scenario*** by providing a ___substring___ of the scenario's name. For example, to run the `"Verify Product We"` scenario:
+
+```
+npx cucumber-js --name "Verify Product We"
+```
+
+ #### Running a Scenario by Tag
+ Tags are defined by using @ before a keyword.
+
+ ```
+ @Login
+Scenario: Valid login with correct credentials
+  Given I have entered valid credentials
+  When I press login
+  Then I should see the dashboard
+
+@Login
+Scenario: Invalid login with incorrect credentials
+  Given I have entered invalid credentials
+  When I press login
+  Then I should see an error message
+
+@ForgotPassword
+Scenario: User requests a password reset
+  Given I click on "Forgot Password"
+  Then I should be redirected to the password reset page
+```
+
+To run scenarios with a specific tag
+
+```
+npx cucumber-js --tags @Login
+```
+
+Running a Scenario with Multiple Tags
+You can also use logical operators (and, or, not) to combine multiple tags
+```
+npx cucumber-js --tags "@Login and @ForgotPassword"
+```
+
+To exclude scenarios with a specific tag (e.g., excluding @ForgotPassword):
+
+```
+npx cucumber-js --tags "not @ForgotPassword"
+```
