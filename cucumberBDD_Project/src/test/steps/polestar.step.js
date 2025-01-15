@@ -26,7 +26,7 @@ Given('User should handle popup window by selecting accep all', async function (
 
 Given("User navigates to the polestar Homepage", async () => {
 
-  await page.goto("https://www.polestar.com/se/");
+  await page.goto(testData.testURL);
 
 });
 //------------------------------------------------------------------
@@ -40,27 +40,27 @@ Given('User should select polestar2 option from top navigation bar', async funct
 
 // User should select design and order option
 Given('User should select design and order option', async function () {
-  await page.click("//*[@id='SXae3TdtSNq9AiI_PwMVAg']"); // Make sure this XPath is correct
+  await page.click(locators.designandOrder); // Make sure this XPath is correct
 });
 
 // User should select Long_range_Dual option
 Given('User should select Long_range_Dual option', async function () {
-  await page.click("//*[@id='section-engine']/div[5]/button[3]/div/span[1]");
+  await page.click(locators.longRangeDuelOption);
 });
 
 // User should select Exteriör
 Given('User Should select Exteriör', async function () {
-  await page.click("//*[@id='section-exterior']/div[4]/div/div/div[2]/div/div/button/div[1]/div[1]/div/img");
+  await page.click(locators.exteriors);
 });
 
 // User should select Interiör
 Given('User Should select Interiör', async function () {
-  await page.click("//*[@id='section-interior']/div[4]/div[3]/div[3]/div[2]/div/div/button/div[1]/div[1]/div/img");
+  await page.click(locators.interiors);
 });
 
 // User should select Fälgar
 Given('User Should select Fälgar', async function () {
-  await page.click("//*[@id='section-wheels']/div[2]/div[2]/div[2]/div[1]/div[2]/div/button/div[1]");
+  await page.click(locators.falgar);
 });
 
 // Select submit button
