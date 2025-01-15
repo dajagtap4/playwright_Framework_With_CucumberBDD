@@ -9,5 +9,6 @@ Feature: Homepage Functionality
   Scenario: TC:002 -  Enter name and email in testautomationpractice's form
     Given User navigates to the testautomationpractice form page
     * User will enter name
-    * User will enter email
+    * User will enter
+    * User assert homepage title.
 
