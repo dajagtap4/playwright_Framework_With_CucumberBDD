@@ -9,5 +9,13 @@ module.exports = {
         password: "invalidPassword"
     },
     
-    testURL:"https://www.polestar.com/se/"
+    testURL:"https://www.polestar.com/se/",
+
+    yourDetailsForm: {
+        firstname: "Neil",
+        lastname: "Armstrong",
+        email: "abc@gmail.com",
+        pincode: "123 45",
+        carsOption: "Polestar 2",
+    }
 };

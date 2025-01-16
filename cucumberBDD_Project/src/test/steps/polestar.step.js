@@ -70,6 +70,77 @@ Given('Select submit button', async function () {
 
 //------------------------------------------------------------------
 
+// TC:002
+
+Given('User should click on discover button', async function () {
+  await page.locator(locators.discover).waitFor();
+  await page.click(locators.discover);
+});
+
+Given('User should click on book test drive button', async function () {
+  await page.locator(locators.booktestdrive).waitFor();
+  await page.click(locators.booktestdrive);
+});
+
+Given('User should click on subscribe button', async function () {
+  await page.locator(locators.Prenumerera).waitFor();
+  await page.click(locators.Prenumerera);
+});
+
+Given('User should eneter firstname in form', async function () {
+  await page.locator(locators.firstname).waitFor({ state: 'visible', timeout: 30000 });
+  await page.locator(locators.firstname).fill(testData.yourDetailsForm.firstname);
+});
+
+Given('User should eneter lastname in form', async function () {
+  await page.locator(locators.lastname).waitFor({ state: 'visible', timeout: 30000 });
+  await page.locator(locators.lastname).fill(testData.yourDetailsForm.lastname);
+});
+
+Given('User should eneter email in form', async function () {
+  await page.locator(locators.lastname).waitFor({ state: 'visible', timeout: 30000 });
+  await page.locator(locators.lastname).fill(testData.yourDetailsForm.lastname);
+});
+
+Given('User should eneter pincode in form', async function () {
+  await page.locator(locators.pincode).waitFor({ state: 'visible', timeout: 30000 });
+  await page.locator(locators.pincode).fill(testData.yourDetailsForm.pincode);
+});
+
+Given('User should select car option from dropDownCarsYouAreInterestedIn', async function () {  
+
+   Given('User should select car option from dropDownCarsYouAreInterestedIn', async function () {
+    // Wait for the dropdown to be visible (ensure it's open before interacting)
+    const dropdownLocator = await page.locator(locators.dropDownCarsYouAreInterestedIn);
+    await dropdownLocator.waitFor({ state: 'visible', timeout: 30000 });
+  
+    // Click to open the dropdown
+    await dropdownLocator.click();
+  
+    // Now wait for the "Polestar 2" option to be visible
+    const polestar2Option = page.locator(locators.polestar2DropdownOption); // Using text selector to identify the option
+    await polestar2Option.waitFor({ state: 'visible', timeout: 30000 });  // Ensure the option is visible before clicking
+  
+    // Click the "Polestar 2" option
+    await polestar2Option.click();
+  
+    await dropdownLocator.click();
+   });
+
+});
+
+Given('User should select checkbox', async function () {
+  await page.locator(locators.checkbox).waitFor({ state: 'visible', timeout: 30000 });
+  await page.click(locators.checkbox);
+});
+
+Given('User should select submit form', async function () {
+  await page.locator(locators.submit).waitFor({ state: 'visible', timeout: 30000 });
+  await page.click(locators.submit);
+});
+
+//------------------------------------------------------------------
+
 // TC:003
 
   Given('User click on instagram link', async function () {
@@ -83,22 +154,6 @@ Given('Select submit button', async function () {
     
     await expect(page).toHaveTitle("Polestar – Elbilar | Polestar Sverige");
     
-  });
-
-// TC: 002
-
-  Given('User navigates to the testautomationpractice form page', async function () {
-    await page.goto('https://testautomationpractice.blogspot.com/'); // Replace with the actual URL
-  });
-
-  Given('User will enter name', async function () {
-    // Fill in the name field
-    await page.fill(locators.nameInput, testData.validUser.name);
-  });
-
-  Given('User will enter email', async function () {
-    // Fill in the email field
-    await page.fill(locators.emailInput, testData.validUser.email);
   });
 
 After(async function () {

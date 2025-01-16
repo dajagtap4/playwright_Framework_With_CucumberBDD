@@ -12,11 +12,20 @@ Feature: Polestar UI Web Testing Functionality
     * Select submit button
 
 
-  # Scenario: TC:002 - Verify user can Book a test drive
-  #  Given User navigates to the polestar Homepage
-  #   * User will accep all 
-  #   * User click on instagram link
-  #   * User assert homepage title.
+  Scenario: TC:002 - Verify user can Book a test drive
+    Given User navigates to the polestar Homepage
+    * User should handle popup window by selecting accep all
+    * User should click on discover button
+    * User should click on book test drive button
+    * User should click on subscribe button
+    * User should eneter firstname in form 
+    * User should eneter lastname in form 
+    * User should eneter email in form 
+    * User should eneter pincode in form 
+    * User should select car option from dropDownCarsYouAreInterestedIn
+    * User should select checkbox
+    * User should select submit form
+
 
 
   Scenario: TC:003 -  navigate to instagram page and verify title
@@ -25,9 +34,3 @@ Feature: Polestar UI Web Testing Functionality
     * User click on instagram link
     * User assert homepage title.
 
-
-  # Scenario: TC:004 - verify title of homepage
-  #   Given User navigates to the polestar Homepage
-  #   * User will accep all 
-  #   * User click on instagram link
-  #   * User assert homepage title.
