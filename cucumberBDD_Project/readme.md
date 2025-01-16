@@ -217,3 +217,216 @@ To exclude scenarios with a specific tag (e.g., excluding @ForgotPassword):
 ```
 npx cucumber-js --tags "not @ForgotPassword"
 ```
+
+
+---
+
+
+> ### 1. Install java 
+
+To Install java [Click Here](https://www.oracle.com/in/java/technologies/downloads/#jdk22-windows)
+
+
+```
+select windows as OS 
+
+click link behind x64 Installer
+
+open downloaded file > double click on it > Next > Close
+```
+`Now we have to set path in env variable.`
+```
+select path from file location upto bin as below
+C:\Program Files\Java\jdk-22\bin
+
+Goto env variable > system variable > path > add path.
+```
+`Check java is installed or not`
+```
+Open cmd > java --version 
+         > javac --version
+```
+---
+>### 2. Vs Code 
+
+[Click here](https://code.visualstudio.com/download) for vs code installation
+
+---
+>### 3. node js
+
+[click here](https://nodejs.org/en/download) for node js installation
+
+Playwright requires Node.js version 12 or above.
+To check your Node.js version
+```
+node -v
+npm -v
+```
+
+---
+
+We have installed all Pre Requisites, we can start with playwright framework, 
+
+
+1. Create folder `Playwright Framework` at any place lets say desktop,
+
+2. Open Vs code, 
+
+    - File > Open folder > select `Playwright Framework`
+
+    - click `extensions` (side vertical bar) >  
+    install `Playwright Test for VSCode`,
+
+    - Terminal > New Terminal > Hit below first command to create project
+    ```
+   npm init playwright@latest
+
+
+   ```
+---
+## API Testing Playwright setup
+
+#### Create `backend/tests/api.spec.ts` in project
+
+`api.spec.ts`
+
+```
+import {expect, test} from '@playwright/test'
+
+var userid;
+
+test.describe('REST API Tests with ReqRes', () => {
+
+test('apiGet',async ({request}) => {
+    const response = await request.get('https://reqres.in/api/users?page=2')
+    console.log(await response.json())
+    expect(response.status()).toBe(200)
+});
+
+test('apiPost',async ({request}) => {
+    const response = await request.post('https://reqres.in/api/users',
+
+                                         {
+                                            data:{"name":"Deepak","job":"QA" },
+                                            headers:{"Accept":"application/json "}
+                                        });
+    console.log(await response.json())
+    expect(response.status()).toBe(201)   
+    
+    var ser = await response.json();
+    userid=ser.id
+})
+
+test('apiPut',async ({request}) => {
+    const response = await request.put('https://reqres.in/api/users/'+userid,
+
+        {
+            data:{"name":"Deepak","job":"Billionaire" },
+            headers:{"Accept":"application/json "}
+        });
+
+    console.log(await response.json())
+    expect(response.status()).toBe(200)   
+
+})
+
+    test('apiDelete',async ({request}) => {
+     await request.delete('https://reqres.in/api/users/'+userid)
+
+    })
+
+});
+```
+
+### make below chnages in `playwright.config.js` file
+
+```
+module.exports = defineConfig({
+  testDir: '.',
+```
+
+Run api test with below command 
+
+Below command will ***excecute all tests*** within `api.spec.ts` file
+
+```
+npx playwright test ./backend/tests/api.spec.ts
+``` 
+
+Excecute specific test within file
+
+```
+ npx playwright test -g "apiGet"
+```
+
+Excecute all tests within project( `api`,`UI` )
+
+```
+npx playwright tests
+```
+---
+
+### Load Testing Using k6
+
+k6 is a modern load-testing tool designed for API and performance testing.
+
+**Key Features:**
+
+Written in JavaScript.
+Highly performant and optimized for scalability.
+Easy integration with CI/CD pipelines.
+Supports complex scenarios (e.g., user authentication, data-driven testing).
+
+> ### Install k6
+
+Official website: [K6 Website](https://k6.io/)
+
+Install K6 Using Chocolatey, open cmd and hit below coomand 
+
+```
+ choco install k6 
+```
+if they are asking to install chocolatey, Run the following command to install Chocolatey
+
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+```
+
+Verify Installation: 
+
+```
+k6 version
+```
+create seperate folder name k6, in k6 create file k6get.js
+
+` k6get.js `
+
+```
+import http from 'k6/http';
+import { sleep, check } from 'k6';
+
+export const options = {
+  stages: [
+    { duration: '30s', target: 10 }, // Ramp-up to 10 users
+    { duration: '1m', target: 10 },  // Stay at 10 users
+    { duration: '10s', target: 0 },  // Ramp-down to 0 users
+  ],
+};
+
+export default function () {
+  const res = http.get('https://test-api.k6.io/public/crocodiles/');
+  check(res, {
+    'status is 200': (r) => r.status === 200,
+    'response time < 200ms': (r) => r.timings.duration < 200,
+  });
+  sleep(1);
+}
+
+```
+
+to run above code use below command 
+
+```
+k6 run k6get.js
+```
