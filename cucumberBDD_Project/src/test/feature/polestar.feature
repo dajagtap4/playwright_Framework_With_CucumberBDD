@@ -11,7 +11,6 @@ Feature: Polestar UI Web Testing Functionality
     * User Should select Fälgar
     * Select submit button
 
-
   Scenario: TC:002 - Verify user can Book a test drive
     Given User navigates to the polestar Homepage
     * User should handle popup window by selecting accep all
@@ -25,8 +24,6 @@ Feature: Polestar UI Web Testing Functionality
     * User should select car option from dropDownCarsYouAreInterestedIn
     * User should select checkbox
     * User should select submit form
-
-
 
   Scenario: TC:003 -  navigate to instagram page and verify title
     Given User navigates to the polestar Homepage
