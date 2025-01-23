@@ -203,13 +203,13 @@ Scenario: User requests a password reset
 To run scenarios with a specific tag
 
 ```
-npx cucumber-js --tags @Login
+npx cucumber-js --tags "@Login"
 ```
 
 Running a Scenario with Multiple Tags
 You can also use logical operators (and, or, not) to combine multiple tags
 ```
-npx cucumber-js --tags "@Login and @ForgotPassword"
+npx cucumber-js --tags "@Login" and "@ForgotPassword"
 ```
 
 To exclude scenarios with a specific tag (e.g., excluding @ForgotPassword):
